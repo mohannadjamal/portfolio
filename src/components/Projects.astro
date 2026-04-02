@@ -1,0 +1,138 @@
+---
+import { site } from "../data/site";
+---
+
+<section class="projects" id="projects" aria-labelledby="projects-heading">
+	<div class="inner">
+		<h2 id="projects-heading">Projects</h2>
+		<ul class="grid">
+			{site.projects.map((project) => (
+				<li class="card">
+					<h3>{project.title}</h3>
+					<p>{project.summary}</p>
+					<ul class="tags" aria-label="Technologies">
+						{project.tags.map((tag) => (
+							<li>{tag}</li>
+						))}
+					</ul>
+					<div class="links">
+						{project.liveUrl ? (
+							<a href={project.liveUrl} rel="noopener noreferrer">
+								Live
+							</a>
+						) : null}
+						{project.sourceUrl ? (
+							<a href={project.sourceUrl} rel="noopener noreferrer">
+								Source
+							</a>
+						) : null}
+						{!project.liveUrl && !project.sourceUrl ? (
+							<span class="soon">Links coming soon</span>
+						) : null}
+					</div>
+				</li>
+			))}
+		</ul>
+	</div>
+</section>
+
+<style>
+	.projects {
+		padding: var(--space-5) var(--space-3);
+		border-top: 1px solid var(--color-border);
+	}
+
+	.inner {
+		max-width: var(--content-max);
+		margin: 0 auto;
+	}
+
+	h2 {
+		font-size: clamp(1.5rem, 3vw, 1.75rem);
+		margin: 0 0 var(--space-4);
+		color: var(--color-text);
+	}
+
+	.grid {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: var(--space-3);
+		grid-template-columns: 1fr;
+	}
+
+	@media (min-width: 640px) {
+		.grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 960px) {
+		.grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	.card {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		padding: var(--space-3);
+		display: flex;
+		flex-direction: column;
+		transition: border-color 0.15s ease;
+	}
+
+	.card:hover {
+		border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-border));
+	}
+
+	.card h3 {
+		font-size: 1.125rem;
+		margin: 0 0 var(--space-2);
+		color: var(--color-text);
+	}
+
+	.card p {
+		flex: 1;
+		font-size: 0.9375rem;
+		margin: 0 0 var(--space-2);
+	}
+
+	.tags {
+		list-style: none;
+		margin: 0 0 var(--space-2);
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.375rem;
+	}
+
+	.tags li {
+		font-size: 0.75rem;
+		color: var(--color-muted);
+		background: var(--color-bg);
+		padding: 0.2rem 0.5rem;
+		border-radius: 6px;
+	}
+
+	.links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2);
+		align-items: center;
+	}
+
+	.links a {
+		font-weight: 600;
+		font-size: 0.875rem;
+		text-decoration: none;
+	}
+
+	.soon {
+		font-size: 0.8125rem;
+		color: var(--color-muted);
+		font-style: italic;
+	}
+</style>
