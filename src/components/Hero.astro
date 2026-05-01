@@ -5,7 +5,7 @@ import { site } from "../data/site";
 <section class="hero" id="top" aria-labelledby="hero-heading">
 	<div class="inner">
 		<div class="hero-main">
-			<p class="eyebrow">Portfolio</p>
+			<p class="eyebrow">CV &amp; work</p>
 			<h1 id="hero-heading">{site.name}</h1>
 			<p class="role">{site.role}</p>
 			<p class="tagline">{site.tagline}</p>
@@ -13,6 +13,9 @@ import { site } from "../data/site";
 		<div class="actions">
 			<a class="cta primary" href="#projects">View projects</a>
 			<a class="cta secondary" href={`mailto:${site.email}`}>Email me</a>
+			<a class="cta secondary" href={site.cvPdf.href} download={site.cvPdf.fileLabel}>
+				Download CV (PDF)
+			</a>
 		</div>
 	</div>
 </section>

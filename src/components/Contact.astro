@@ -9,6 +9,9 @@ import { site } from "../data/site";
 			Prefer email? Reach me at
 			<a href={`mailto:${site.email}`}>{site.email}</a>.
 		</p>
+		<p class="lead cv-line">
+			<a href={site.cvPdf.href} download={site.cvPdf.fileLabel}>Download CV (PDF)</a>
+		</p>
 		<ul class="social" aria-label="Social profiles">
 			<li>
 				<a href={site.social.github} rel="noopener noreferrer">GitHub</a>
@@ -45,6 +48,15 @@ import { site } from "../data/site";
 
 	.lead :global(a) {
 		font-weight: 600;
+	}
+
+	.cv-line {
+		margin-bottom: var(--space-4);
+	}
+
+	.muted {
+		color: var(--color-muted);
+		font-weight: 400;
 	}
 
 	.social {
