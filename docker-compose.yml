@@ -1,0 +1,13 @@
+name: portfolio
+
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        # Cloudflare Tunnel terminates TLS at the edge and forwards plain HTTP to
+        # cloudflared, whose ingress points at http://localhost:8080 — so this mapping
+        # and that ingress have to agree. Change one and you change both.
+        ports:
+            - '8080:80'
+        restart: unless-stopped

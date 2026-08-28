@@ -1,0 +1,80 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+# There is one self-hosted runner and it lives on the deploy target, so runs do not
+# happen in parallel — they queue. Superseding is the right behaviour for a deploy
+# anyway: two pushes a minute apart do not need the first one shipped, they need the
+# second one shipped. It also means a wedged run cannot hold everything behind it.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    # A hosted runner, so an overrun costs minutes rather than blocking anything — but
+    # an Astro build is seconds and a job that has run for ten is stuck.
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # The only gate this repo has: there is no test suite, so a build that succeeds
+      # is the whole signal. It does catch the failure that actually happens here —
+      # a malformed src/data/site.ts, which is where every content change lands.
+      # Astro's equivalent of `tsc`: it type-checks the .astro templates as well as the
+      # .ts files, which a bare `tsc` cannot see into. It caught real dead code the
+      # first time it ran — a branch narrowed to `never` by `as const`.
+      - name: Type-check
+        run: npx astro check
+
+      - name: Build
+        run: npm run build
+
+  deploy:
+    needs: test
+    # Not on pull requests, and not on a branch that merely exists. Reading the default
+    # branch rather than hardcoding it means a master -> main rename does not silently
+    # stop deploying.
+    if: github.event_name == 'push' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: self-hosted
+
+    # GitHub's default job timeout is 360 minutes, and on a self-hosted runner that is
+    # 360 minutes of the only runner there is. `docker compose build` runs npm ci and
+    # the whole Astro build on the deploy target, which is a small server; when that
+    # thrashes, the step does not fail so much as stop making progress. A failed deploy
+    # that releases the runner is strictly better than a hanging one that does not.
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Timed separately from the job so the log says which step stopped. This is the
+      # expensive one: npm ci and the full Astro build, inside the image, on the server,
+      # every deploy.
+      - name: Build image
+        timeout-minutes: 10
+        run: docker compose build
+
+      - name: Start container
+        timeout-minutes: 3
+        run: docker compose up -d
+
+      # Each build leaves the previous image untagged. Without this they accumulate
+      # until the disk fills, which presents as a build failure with a confusing message.
+      - name: Prune old images
+        run: docker image prune -f

@@ -25,8 +25,10 @@ import { site } from "../data/site";
 							<a href={project.sourceUrl} rel="noopener noreferrer">
 								Source
 							</a>
+						) : project.sourcePrivate ? (
+							<span class="private">Private</span>
 						) : null}
-						{!project.liveUrl && !project.sourceUrl ? (
+						{!project.liveUrl && !project.sourceUrl && !project.sourcePrivate ? (
 							<span class="soon">Links coming soon</span>
 						) : null}
 					</div>
@@ -128,6 +130,12 @@ import { site } from "../data/site";
 		font-weight: 600;
 		font-size: 0.875rem;
 		text-decoration: none;
+	}
+
+	.private {
+		font-size: 0.875rem;
+		font-weight: 600;
+		color: var(--color-muted);
 	}
 
 	.soon {
