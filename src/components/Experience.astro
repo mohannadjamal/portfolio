@@ -1,0 +1,145 @@
+---
+import { site } from "../data/site";
+---
+
+<section class="experience" id="experience" aria-labelledby="experience-heading">
+	<div class="inner">
+		<h2 id="experience-heading">Experience</h2>
+		<ol class="jobs">
+			{site.experience.map((job) => (
+				<li class="job">
+					<div class="head">
+						<h3>
+							{job.role} <span class="sep" aria-hidden="true">·</span>{" "}
+							<span class="company">{job.company}</span>
+						</h3>
+						<p class="period">{job.period}</p>
+					</div>
+					<p class="context">{job.context}</p>
+					<ul class="highlights">
+						{job.highlights.map((item) => (
+							<li>{item}</li>
+						))}
+					</ul>
+				</li>
+			))}
+		</ol>
+		<div class="education">
+			<h3 class="sub-title">Education</h3>
+			<p>
+				<strong>{site.education.degree}</strong> · {site.education.school} ·{" "}
+				<span class="muted">{site.education.year}</span>
+			</p>
+		</div>
+	</div>
+</section>
+
+<style>
+	.experience {
+		padding: var(--space-5) var(--space-3);
+		border-top: 1px solid var(--color-border);
+	}
+
+	.inner {
+		max-width: var(--content-max);
+		margin: 0 auto;
+	}
+
+	h2 {
+		font-size: clamp(1.5rem, 3vw, 1.75rem);
+		margin: 0 0 var(--space-4);
+		color: var(--color-text);
+	}
+
+	.jobs {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: var(--space-4);
+	}
+
+	.job {
+		padding-left: var(--space-3);
+		border-left: 2px solid var(--color-border);
+	}
+
+	.job:first-child {
+		border-left-color: var(--color-accent);
+	}
+
+	.head {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 0 var(--space-2);
+	}
+
+	.head h3 {
+		font-size: 1.125rem;
+		margin: 0;
+		color: var(--color-text);
+	}
+
+	.sep {
+		color: var(--color-muted);
+		font-weight: 400;
+	}
+
+	.company {
+		color: var(--color-accent);
+	}
+
+	.period {
+		margin: 0;
+		font-size: 0.875rem;
+		color: var(--color-muted);
+		white-space: nowrap;
+	}
+
+	.context {
+		margin: 0.25rem 0 var(--space-2);
+		font-size: 0.875rem;
+		font-style: italic;
+		color: var(--color-muted);
+	}
+
+	.highlights {
+		list-style: disc;
+		margin: 0;
+		padding-left: 1.1rem;
+		max-width: var(--max-width);
+		display: grid;
+		gap: 0.375rem;
+	}
+
+	.highlights li {
+		font-size: 0.9375rem;
+	}
+
+	.education {
+		margin-top: var(--space-5);
+	}
+
+	.sub-title {
+		font-size: 0.8125rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--color-muted);
+		margin: 0 0 var(--space-1);
+	}
+
+	.education p {
+		margin: 0;
+	}
+
+	.education strong {
+		color: var(--color-text);
+	}
+
+	.muted {
+		color: var(--color-muted);
+	}
+</style>
