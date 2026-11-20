@@ -12,7 +12,7 @@ const projects: readonly Project[] = [
 	{
 		title: "TOP Academy",
 		summary:
-			"Laravel + Inertia/React platform for DRM-protected video courses for dental students and dentists — role-based access for admins, instructors and students, VDOCipher behind a pluggable video-provider interface, and Docker + GitHub Actions CI/CD. I co-founded it with an experienced dentist and dentistry instructor; it's live at topacademy.app.",
+			"Laravel + Inertia/React platform for DRM-protected video courses for dental students and dentists — role-based access for admins, instructors and students, VDOCipher behind a pluggable video-provider interface, and Docker + GitHub Actions CI/CD. I co-founded it with an experienced dentist and dentistry instructor; it's live at topacademy.app with 600+ students signed up from Palestine and other Arab countries.",
 		tags: ["Laravel", "Inertia + React", "TypeScript", "DRM video"],
 		liveUrl: "https://topacademy.app",
 		sourcePrivate: true,
@@ -34,6 +34,8 @@ export type Job = {
 	/** Line under the title: what the company does · where. */
 	context: string;
 	highlights: readonly string[];
+	/** Current roles render expanded; past roles start collapsed. */
+	current?: boolean;
 };
 
 const experience: readonly Job[] = [
@@ -41,6 +43,7 @@ const experience: readonly Job[] = [
 		role: "Full-Stack Software Engineer",
 		company: "DeltaSmarts",
 		period: "Aug 2025 – Present",
+		current: true,
 		context: "Accounting technology firm · Jerusalem",
 		highlights: [
 			"Lead end-to-end development of a full-stack accounting platform (Laravel, Angular, React Native) serving 500+ active business clients.",
@@ -48,6 +51,17 @@ const experience: readonly Job[] = [
 			"Consolidated legacy web and mobile interfaces into a unified design system, improving user retention and cross-platform consistency.",
 			"Built data-driven financial dashboards and automated reporting tools, reducing clients' manual overhead.",
 			"Drive technical direction through code review, feature scoping and architectural roadmaps in a cross-functional Agile team, and embedded AI-assisted development into the team's workflow.",
+		],
+	},
+	{
+		role: "Co-Founder",
+		company: "TOP Academy",
+		period: "Jun 2026 – Present",
+		current: true,
+		context: "University course platform · Palestine",
+		highlights: [
+			"Co-founded a Palestinian university course platform, currently focused on dentistry students, with 600+ students signed up from Palestine and other Arab countries.",
+			"Designed and built the website end to end in Laravel and Inertia (React), with encrypted video delivery and Docker-based CI/CD.",
 		],
 	},
 	{
@@ -93,6 +107,55 @@ const experience: readonly Job[] = [
 	},
 ];
 
+export type SkillCategory = {
+	name: string;
+	/** Items in visual groups, like the "·"-separated runs on the CV. */
+	groups: readonly (readonly string[])[];
+	note?: string;
+};
+
+const skills: readonly SkillCategory[] = [
+	{
+		name: "Engineering",
+		groups: [
+			["TypeScript", "JavaScript", "Python", "PHP", "Dart", "SQL"],
+			["Next.js", "Django", "Django REST Framework", "Laravel", "Wagtail CMS"],
+			["React", "Angular", "Redux", "Tailwind", "SASS"],
+			["Flutter", "React Native"],
+			["RTL and bilingual interfaces"],
+		],
+	},
+	{
+		name: "Product",
+		groups: [
+			[
+				"Product strategy",
+				"Roadmapping",
+				"Specification writing",
+				"Delivery pipeline design",
+				"Release management",
+				"Jira",
+			],
+		],
+	},
+	{
+		name: "Infra & Testing",
+		groups: [
+			["PostgreSQL", "Supabase", "MySQL", "Docker", "Vercel", "CI/CD", "Git"],
+			["Unit and feature testing (Django, PHPUnit)"],
+		],
+	},
+	{
+		name: "AI-Augmented",
+		groups: [["Claude Code", "Claude Design", "Cursor", "Vercel AI Gateway"]],
+		note: "LLM-assisted development, review and prototyping",
+	},
+	{
+		name: "Languages",
+		groups: [["Arabic (native)", "English (professional working)", "Hebrew (conversational)"]],
+	},
+];
+
 export const site = {
 	lang: "en",
 	name: "Mohannad Jamal",
@@ -102,52 +165,13 @@ export const site = {
 	role: "Full-stack software engineer · Jerusalem · 5 years",
 	tagline:
 		"From database schema to UI: currently building an accounting platform used by 500+ business clients, after production systems for 40,000+ users in telecom and content management.",
-	bio: [
-		"Full-stack software engineer with five years of production experience across web and mobile. I'm currently building an accounting platform used by 500+ business clients at DeltaSmarts; earlier work delivered production systems to 40,000+ end users in telecommunications and content management.",
-		"I own features from database schema to UI, and I work natively in AI-augmented workflows, using Claude Code, Claude Design and Cursor to ship faster without trading away quality. On the product side I write specifications, plan roadmaps and set up release processes.",
-		"Arabic (native) · English (professional working) · Hebrew (conversational)",
-	],
 	experience,
 	education: {
 		degree: "BSc in Computer Science",
 		school: "Birzeit University",
 		year: "2019",
 	},
-	skills: [
-		"TypeScript",
-		"JavaScript",
-		"Python",
-		"PHP",
-		"Dart",
-		"SQL",
-		"Laravel",
-		"Django",
-		"Django REST Framework",
-		"Next.js",
-		"Wagtail",
-		"React",
-		"Angular",
-		"Redux",
-		"Tailwind",
-		"React Native",
-		"Flutter",
-		"PostgreSQL",
-		"MySQL",
-		"Supabase",
-		"Docker",
-		"CI/CD",
-		"Vercel",
-		"Git",
-		"REST APIs",
-		"Unit & feature testing",
-		"RTL & bilingual UI",
-		"Product specs & roadmapping",
-		"Release management",
-		"Jira",
-		"Claude Code",
-		"Claude Design",
-		"Cursor",
-	],
+	skills,
 	projects,
 	email: "jamalmohannad@gmail.com",
 	social: {
