@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Server-only compose settings (see docs/DEPLOYMENT.md)
+docker-compose.override.yml

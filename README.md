@@ -24,19 +24,10 @@ docker run --rm -p 8080:80 portfolio
 
 Open `http://localhost:8080`.
 
-## CI/CD (GitHub Actions)
+## CI and deployment
 
-| Workflow | When | What it does |
-| :------- | :--- | :------------- |
-| [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | Push / PR to `main` or `master` | `npm ci`, `npm run build`, and a non-push Docker build (cache via GitHub Actions) |
-| [`.github/workflows/docker-publish.yml`](.github/workflows/docker-publish.yml) | Push to default branch (`main` / `master`) or manual run | Builds and pushes the image to **GitHub Container Registry** (`ghcr.io/<owner>/<repo>`) with tags `latest` (default branch only) and commit SHA |
-
-After the first publish, make the package **public** (or grant access) under **Packages** in the repo or your profile if pull fails for other users. To run a published image:
-
-```sh
-docker pull ghcr.io/OWNER/REPO:latest
-docker run --rm -p 8080:80 ghcr.io/OWNER/REPO:latest
-```
+- [`.github/workflows/ci-cd.yml`](.github/workflows/ci-cd.yml) (`CI`): on every push and PR to `main` / `master`, runs `npm ci`, `astro check` and `npm run build`.
+- Deployment is manual on the home server: see [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ## Structure
 
@@ -45,4 +36,4 @@ docker run --rm -p 8080:80 ghcr.io/OWNER/REPO:latest
 - `src/components/` — Header, Hero, About, Projects, Contact
 - `public/` — static assets (e.g. `favicon.svg`)
 - `Dockerfile`, `docker/nginx.conf` — production container
-- `.github/workflows/` — CI and container publish
+- `.github/workflows/` — CI (type-check + build)
