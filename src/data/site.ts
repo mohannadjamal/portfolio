@@ -6,6 +6,8 @@ export type Project = {
 	sourceUrl?: string;
 	/** Source exists but is not public — renders a plain "Private" label, not a link. */
 	sourcePrivate?: boolean;
+	/** Share of the row on wide screens, in percent. Cards in one row should add up to 100. */
+	width: number;
 };
 
 const projects: readonly Project[] = [
@@ -16,6 +18,7 @@ const projects: readonly Project[] = [
 		tags: ["Laravel", "Inertia + React", "TypeScript", "DRM video"],
 		liveUrl: "https://topacademy.app",
 		sourcePrivate: true,
+		width: 60,
 	},
 	{
 		title: "Personal site",
@@ -24,6 +27,7 @@ const projects: readonly Project[] = [
 		tags: ["Astro", "Docker", "CI/CD"],
 		liveUrl: "https://www.mohannadjamal.dev",
 		sourceUrl: "https://github.com/mohannadjamal/portfolio",
+		width: 40,
 	},
 ];
 
@@ -109,50 +113,70 @@ const experience: readonly Job[] = [
 
 export type SkillCategory = {
 	name: string;
-	/** Items in visual groups, like the "·"-separated runs on the CV. */
-	groups: readonly (readonly string[])[];
+	items: readonly string[];
 	note?: string;
+	/** Takes the full row, and its pills stretch to fill each line. */
+	wide?: boolean;
 };
 
 const skills: readonly SkillCategory[] = [
 	{
 		name: "Engineering",
-		groups: [
-			["TypeScript", "JavaScript", "Python", "PHP", "Dart", "SQL"],
-			["Next.js", "Django", "Django REST Framework", "Laravel", "Wagtail CMS"],
-			["React", "Angular", "Redux", "Tailwind", "SASS"],
-			["Flutter", "React Native"],
-			["RTL and bilingual interfaces"],
+		wide: true,
+		items: [
+			"TypeScript",
+			"JavaScript",
+			"Python",
+			"PHP",
+			"Dart",
+			"SQL",
+			"Next.js",
+			"Django",
+			"Django REST Framework",
+			"Laravel",
+			"Wagtail CMS",
+			"React",
+			"Angular",
+			"Redux",
+			"Tailwind",
+			"SASS",
+			"Flutter",
+			"React Native",
+			"RTL and bilingual interfaces",
 		],
 	},
 	{
 		name: "Product",
-		groups: [
-			[
-				"Product strategy",
-				"Roadmapping",
-				"Specification writing",
-				"Delivery pipeline design",
-				"Release management",
-				"Jira",
-			],
+		items: [
+			"Product strategy",
+			"Roadmapping",
+			"Specification writing",
+			"Delivery pipeline design",
+			"Release management",
+			"Jira",
 		],
 	},
 	{
 		name: "Infra & Testing",
-		groups: [
-			["PostgreSQL", "Supabase", "MySQL", "Docker", "Vercel", "CI/CD", "Git"],
-			["Unit and feature testing (Django, PHPUnit)"],
+		items: [
+			"PostgreSQL",
+			"Supabase",
+			"MySQL",
+			"Docker",
+			"Vercel",
+			"CI/CD",
+			"Git",
+			"Unit and feature testing (Django, PHPUnit)",
 		],
 	},
 	{
 		name: "AI-Augmented",
-		groups: [["Claude Code", "Claude Design", "Cursor", "Vercel AI Gateway"]],
+		items: ["Claude Code", "Claude Design", "Cursor", "Vercel AI Gateway"],
 		note: "LLM-assisted development, review and prototyping",
 	},
 	{
 		name: "Languages",
-		groups: [["Arabic (native)", "English (professional working)", "Hebrew (conversational)"]],
+		items: ["Arabic (native)", "English (professional working)", "Hebrew (conversational)"],
 	},
 ];
 

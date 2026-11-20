@@ -7,17 +7,13 @@ import { site } from "../data/site";
 		<h2 id="skills-heading">Skills &amp; tools</h2>
 		<div class="grid">
 			{site.skills.map((category) => (
-				<article class="card">
+				<article class:list={["card", { wide: category.wide }]}>
 					<h3>{category.name}</h3>
-					<div class="groups">
-						{category.groups.map((group) => (
-							<ul class="pills">
-								{group.map((item) => (
-									<li>{item}</li>
-								))}
-							</ul>
+					<ul class="pills">
+						{category.items.map((item) => (
+							<li>{item}</li>
 						))}
-					</div>
+					</ul>
 					{category.note ? <p class="note">{category.note}</p> : null}
 				</article>
 			))}
@@ -53,8 +49,7 @@ import { site } from "../data/site";
 			grid-template-columns: repeat(2, 1fr);
 		}
 
-		/* Engineering is the largest category — give it the full row. */
-		.card:first-child {
+		.card.wide {
 			grid-column: 1 / -1;
 		}
 	}
@@ -75,11 +70,6 @@ import { site } from "../data/site";
 		margin: 0 0 var(--space-2);
 	}
 
-	.groups {
-		display: grid;
-		gap: 0.625rem;
-	}
-
 	.pills {
 		list-style: none;
 		margin: 0;
@@ -96,6 +86,12 @@ import { site } from "../data/site";
 		border-radius: 999px;
 		font-size: 0.875rem;
 		color: var(--color-text);
+	}
+
+	/* Wide card: pills grow so every line runs the full width of the card. */
+	.card.wide .pills li {
+		flex: 1 1 auto;
+		text-align: center;
 	}
 
 	.note {
