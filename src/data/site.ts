@@ -164,7 +164,7 @@ export const site = {
 		"Full-stack software engineer with five years of production experience: an accounting platform for 500+ business clients, ISP systems for 40,000+ users, and CMS.",
 	role: "Full-stack software engineer · Jerusalem · 5 years",
 	tagline:
-		"From database schema to UI: currently building an accounting platform used by 500+ business clients, after production systems for 40,000+ users in telecom and content management.",
+		"From database schema to UI: currently building an accounting platform used by 500+ business clients, after production systems for 40,000+ users in telecom and content management. Co-founder of TOP Academy, a university course platform with 600+ students.",
 	experience,
 	education: {
 		degree: "BSc in Computer Science",
