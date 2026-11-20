@@ -6,8 +6,6 @@ export type Project = {
 	sourceUrl?: string;
 	/** Source exists but is not public — renders a plain "Private" label, not a link. */
 	sourcePrivate?: boolean;
-	/** Share of the row on wide screens, in percent. Cards in one row should add up to 100. */
-	width: number;
 };
 
 const projects: readonly Project[] = [
@@ -18,7 +16,6 @@ const projects: readonly Project[] = [
 		tags: ["Laravel", "Inertia + React", "TypeScript", "DRM video"],
 		liveUrl: "https://topacademy.app",
 		sourcePrivate: true,
-		width: 60,
 	},
 	{
 		title: "Personal site",
@@ -27,7 +24,6 @@ const projects: readonly Project[] = [
 		tags: ["Astro", "Docker", "CI/CD"],
 		liveUrl: "https://www.mohannadjamal.dev",
 		sourceUrl: "https://github.com/mohannadjamal/portfolio",
-		width: 40,
 	},
 ];
 

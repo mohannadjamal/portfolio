@@ -7,7 +7,7 @@ import { site } from "../data/site";
 		<h2 id="projects-heading">Projects</h2>
 		<ul class="grid">
 			{site.projects.map((project) => (
-				<li class="card" style={`--w: ${project.width}`}>
+				<li class="card">
 					<h3>{project.title}</h3>
 					<p>{project.summary}</p>
 					<ul class="tags" aria-label="Technologies">
@@ -68,11 +68,12 @@ import { site } from "../data/site";
 		flex: 0 0 100%;
 	}
 
-	/* Each card takes its project's share of the row; the gap is split between them
-	   so a row whose widths add up to 100 fills it exactly. */
+	/* Projects share the row equally: two get 50% each, three 33% each, and so on.
+	   Below the minimum width a card wraps onto the next row. */
 	@media (min-width: 768px) {
 		.card {
-			flex-basis: calc(var(--w) * 1% - var(--space-3) * (1 - var(--w) / 100));
+			flex: 1 1 0;
+			min-width: 280px;
 		}
 	}
 
