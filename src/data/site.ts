@@ -27,6 +27,72 @@ const projects: readonly Project[] = [
 	},
 ];
 
+export type Job = {
+	role: string;
+	company: string;
+	period: string;
+	/** Line under the title: what the company does · where. */
+	context: string;
+	highlights: readonly string[];
+};
+
+const experience: readonly Job[] = [
+	{
+		role: "Full-Stack Software Engineer",
+		company: "DeltaSmarts",
+		period: "Aug 2025 – Present",
+		context: "Accounting technology firm · Jerusalem",
+		highlights: [
+			"Lead end-to-end development of a full-stack accounting platform (Laravel, Angular, React Native) serving 500+ active business clients.",
+			"Engineered a high-performance, hardware-agnostic document engine for financial reporting and real-time transaction processing, improving reliability across diverse client environments.",
+			"Consolidated legacy web and mobile interfaces into a unified design system, improving user retention and cross-platform consistency.",
+			"Built data-driven financial dashboards and automated reporting tools, reducing clients' manual overhead.",
+			"Drive technical direction through code review, feature scoping and architectural roadmaps in a cross-functional Agile team, and embedded AI-assisted development into the team's workflow.",
+		],
+	},
+	{
+		role: "Chief Product Officer (part-time)",
+		company: "Noqta Platform",
+		period: "Aug 2026 – Oct 2026",
+		context: "Restaurant operating system · Ramallah",
+		highlights: [
+			"Wrote product specifications and set up the release process for an early-stage restaurant platform.",
+		],
+	},
+	{
+		role: "Freelance Full-Stack Developer",
+		company: "Self-Employed",
+		period: "Jan 2025 – Aug 2025",
+		context: "Remote · Web and mobile projects for small-business clients",
+		highlights: [
+			"Delivered end-to-end web applications (Yii 2, React) — requirements, data modeling, implementation and deployment.",
+			"Managed scope, deadlines and client communication directly as a solo engineer.",
+		],
+	},
+	{
+		role: "Full-Stack Software Engineer",
+		company: "Mada",
+		period: "Dec 2022 – Dec 2024",
+		context: "Internet service provider · Ramallah",
+		highlights: [
+			"Led full-stack development of web and mobile applications (Django, Flutter) serving 40,000+ active clients.",
+			"Architected a versioned REST API layer with strict data contracts, guaranteeing reliability and structural consistency across all client surfaces.",
+			"Introduced project-wide Django unit testing, raising release confidence across API and data-model changes.",
+			"Rebuilt the company website on Wagtail CMS and containerized all production deployments with Docker, standardizing the development-to-production pipeline and eliminating environment drift.",
+		],
+	},
+	{
+		role: "Frontend Developer",
+		company: "ASAL Technologies",
+		period: "Nov 2021 – Nov 2022",
+		context: "International software outsourcing · Ramallah",
+		highlights: [
+			"Developed modular React.js UI components integrated against REST API backends for an in-house product.",
+			"Engineered responsive interfaces (HTML5, CSS3, JavaScript) with complex application state managed in Redux.",
+		],
+	},
+];
+
 export const site = {
 	lang: "en",
 	name: "Mohannad Jamal",
@@ -37,11 +103,16 @@ export const site = {
 	tagline:
 		"From database schema to UI: currently building an accounting platform used by 500+ business clients, after production systems for 40,000+ users in telecom and content management.",
 	bio: [
-		"Full-stack software engineer with five years of production experience across web and mobile. I'm currently building an accounting platform used by 500+ business clients at DeltaSmarts; earlier work delivered production systems to 40,000+ end users in telecommunications and content management. I work natively in AI-augmented workflows, using Claude Code, Claude Design and Cursor to ship faster without trading away quality.",
-		"At DeltaSmarts I lead end-to-end development of a full-stack accounting platform — Laravel, Angular, and React Native — for 500+ active business clients: a hardware-agnostic document engine for financial reporting and real-time transaction processing (Puppeteer document generation, thermal printing over ESC/POS and ZPL), a unified design system that replaced the legacy web and mobile interfaces, and data-driven financial dashboards with automated reporting. I drive technical direction through code review, feature scoping, and architectural roadmaps in a cross-functional Agile team, and brought AI-assisted development into the team's workflow.",
-		"From August to October 2026 I was also part-time Chief Product Officer at Noqta, an early-stage restaurant operating system in Ramallah, where I wrote the product specifications and set up the release process.",
-		"Before DeltaSmarts I spent two years at Mada, an ISP, leading Django and Flutter development for 40,000+ active clients — a versioned REST API layer with strict data contracts, project-wide Django unit testing, Docker across every production deployment, and a company site rebuilt on Wagtail. I started out in frontend at ASAL Technologies building modular React components, and spent 2025 freelancing end-to-end web applications (Yii 2, React) for small-business clients. BSc in Computer Science, Birzeit University (2019); Arabic native, English professional, Hebrew conversational.",
+		"Full-stack software engineer with five years of production experience across web and mobile. I'm currently building an accounting platform used by 500+ business clients at DeltaSmarts; earlier work delivered production systems to 40,000+ end users in telecommunications and content management.",
+		"I own features from database schema to UI, and I work natively in AI-augmented workflows, using Claude Code, Claude Design and Cursor to ship faster without trading away quality. On the product side I write specifications, plan roadmaps and set up release processes.",
+		"Arabic (native) · English (professional working) · Hebrew (conversational)",
 	],
+	experience,
+	education: {
+		degree: "BSc in Computer Science",
+		school: "Birzeit University",
+		year: "2019",
+	},
 	skills: [
 		"TypeScript",
 		"JavaScript",
